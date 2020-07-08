@@ -1,5 +1,4 @@
 #Author: RAHUL RANJAN
-
 @Search-CityWeather
 Feature: Acceptance testing to search Weather for cities
       Check that weather serach for cities is all ok
@@ -7,143 +6,141 @@ Feature: Acceptance testing to search Weather for cities
   @Search-CityWeather-Positive
   Scenario Outline: Search with city
     Given I am on the weather website "http://localhost:3000/"
-    When I input the city
-    
-    Examples: 
-      | City    |  Status  |
-      |aberdeen	|  success |
-      |glasgow  |  success |
-      |edinburgh|  success |  
-      |perth    |  success |
-      |striling |  success |
-         
+    When I input the city "<City>"
     Then Weather details are displayed for cities
-    
 
-    @check1
-    Scenario Outline: check that 5 days report displayed
-    Given I am on the weather website "http://localhost:3000/"
-    When I input the city
-    
     Examples: 
-      | City    |  Status  |
-      |aberdeen	|  success |
-      |glasgow  |  success |
-      |edinburgh|  success |  
-      |perth    |  success |
-      |striling |  success |
-         
-    Then 5 day weather details are displayed for cities
-    @check2
-    Scenario Outline: check that when days are clicked
+      | City      |
+      | aberdeen  |
+      | glasgow   |
+      | edinburgh |
+      | perth     |
+      | striling  |
+
+  @check1
+  Scenario Outline: check that Five days report displayed
     Given I am on the weather website "http://localhost:3000/"
-    When I input the city 
-    And I click on the day field 
-        
+    When I input the city "<City>"
+    Then Five day weather details are displayed "<Day>"
+
     Examples: 
-      | City    |  Status  |
-      |aberdeen	|  success |
-      |glasgow  |  success |
-      |edinburgh|  success |  
-      |perth    |  success |
-      |striling |  success |
-         
-    Then i get the 3 hours of forecast for city
-    @check3
-    Scenario Outline: check that when days are clicked and again clicked
+      | City      | Day |
+      | aberdeen  |  20 |
+      | glasgow   |  21 |
+      | edinburgh |  22 |
+      | perth     |  23 |
+      | striling  |  24 |
+
+  @check2
+  Scenario Outline: check that when days are clicked
     Given I am on the weather website "http://localhost:3000/"
-    When I input the city 
-    And I click on the day and again click it.
-        
+    When I input the city "<City>"
+    And I click on the day "<Day>"
+    Then I get forecast for city in Hours
+      | Hours |
+      | 13:00 |
+      | 14:00 |
+      | 15:00 |
+
     Examples: 
-      | City    |  Status  |
-      |aberdeen	|  success |
-      |glasgow  |  success |
-      |edinburgh|  success |  
-      |perth    |  success |
-      |striling |  success |
-         
-    Then I see that 3 hours of forecast for city disappeared
+      | City      | Day |
+      | aberdeen  |  20 |
+      | glasgow   |  21 |
+      | edinburgh |  22 |
+      | perth     |  23 |
+      | striling  |  24 |
+
+  @check3
+  Scenario Outline: check that when days are clicked and again clicked
+    Given I am on the weather website "http://localhost:3000/"
+    When I input the city "<City>"
+    And I click on the day "<Day>"
+    Then I see that Three hours of forecast for city disappeared
+
+    Examples: 
+      | City      | Day |
+      | aberdeen  |  20 |
+      | glasgow   |  21 |
+      | edinburgh |  22 |
+      | perth     |  23 |
+      | striling  |  24 |
 
   @check4
-    Scenario Outline: check that when days are clicked and again clicked
+  Scenario Outline: check that when days are clicked and again clicked
     Given I am on the weather website "http://localhost:3000/"
-    When I input the city 
-    And I click on the day 
-            
-    Examples: 
-      | City    |  Status  |
-      |aberdeen	|  success |
-      |glasgow  |  success |
-      |edinburgh|  success |  
-      |perth    |  success |
-      |striling |  success |
-         
-    Then I see that 3 hours of forecast for city with summary for condition
+    When I input the city "<City>"
+    And I click on the day "<Day>"
+    Then I see that Three hours of forecast for city summary for condition
     And condition is displaying most dominant condition for the day
 
-   @check5
-    Scenario Outline: check that when days are clicked and again clicked
-    Given I am on the weather website "http://localhost:3000/"
-    When I input the city 
-    And I click on the day 
-            
     Examples: 
-      | City    |  Status  |
-      |aberdeen	|  success |
-      |glasgow  |  success |
-      |edinburgh|  success |  
-      |perth    |  success |
-      |striling |  success |
-         
-    Then I see that 3 hours of forecast for city with summary for wind
+      | City      | Day |
+      | aberdeen  |  20 |
+      | glasgow   |  21 |
+      | edinburgh |  22 |
+      | perth     |  23 |
+      | striling  |  24 |
+
+  @check5
+  Scenario Outline: check that when days are clicked and again clicked
+    Given I am on the weather website "http://localhost:3000/"
+    When I input the city "<City>"
+    And I click on the day "<Day>"
+    Then I see that Three hours of forecast for city with summary for wind
     And most dominant wind speed is displayed for the day
-   @check6
-    Scenario Outline: check that when days are clicked and again clicked
-    Given I am on the weather website "http://localhost:3000/"
-    When I input the city 
-    And I click on the day 
-            
+
     Examples: 
-      | City    |  Status  |
-      |aberdeen	|  success |
-      |glasgow  |  success |
-      |edinburgh|  success |  
-      |perth    |  success |
-      |striling |  success |
-         
-    Then I see that 3 hours of forecast for city for rainfall
+      | City      | Day |
+      | aberdeen  |  20 |
+      | glasgow   |  21 |
+      | edinburgh |  22 |
+      | perth     |  23 |
+      | striling  |  24 |
+
+  @check6
+  Scenario Outline: check that when days are clicked and again clicked
+    Given I am on the weather website "http://localhost:3000/"
+    When I input the city "<City>"
+    And I click on the day "<Day>"
+    Then I see that Three hours of forecast for city for rainfall
     And rainfall is aggregarted for the day
-    
-       @check7
-    Scenario Outline: check that when days are clicked and again clicked
-    Given I am on the weather website "http://localhost:3000/"
-    When I input the city 
-    And I click on the day 
-            
+
     Examples: 
-      | City    |  Status  |
-      |aberdeen	|  success |
-      |glasgow  |  success |
-      |edinburgh|  success |  
-      |perth    |  success |
-      |striling |  success |
-         
-    Then I see that 3 hours of forecast for city for temperature
-    And Temperature is displaying maximum temperatutre  for the day
-    And Temparture is displaying minimum temperature for the day
+      | City      | Day |
+      | aberdeen  |  20 |
+      | glasgow   |  21 |
+      | edinburgh |  22 |
+      | perth     |  23 |
+      | striling  |  24 |
+
+  @check7
+  Scenario Outline: check that when days are clicked and again clicked
+    Given I am on the weather website "http://localhost:3000/"
+    When I input the city "<City>"
+    And I click on the day "<Day>"
+    Then I see that Three hours of forecast for city temperature
+    And Temperature is displaying Maximum temperatutre  for the day
+    And Temparture is displaying Minimum temperature for the day
+
+    Examples: 
+      | City      | Day |
+      | aberdeen  |  20 |
+      | glasgow   |  21 |
+      | edinburgh |  22 |
+      | perth     |  23 |
+      | striling  |  24 |
+
   @Search-CityWeather-Negative
- Scenario Outline: Search with city
+  Scenario Outline: Search with city
     Given I am on the weather website "http://localhost:3000/"
-    When I input the city
-    
+    When I input the city "<City>"
+    Then Weather details not displayed for cities "<City>"
+    And error message is displayed "<error>"
+
     Examples: 
-      | City    |  Fail  |
-      |aberdeene	|  Fail |
-      |glasgowe  |  Fail |
-      |edinburghi|  Fail |  
-      |pert    |  Fail |
-      |strilng |  Fail |
-         
-    Then Weather details not displayed for cities
-    And check more outcomes
+      | City      | error |
+      | aberdeen  | error |
+      | glasgow   | error |
+      | edinburgh | error |
+      | perth     | error |
+      | striling  | error |
